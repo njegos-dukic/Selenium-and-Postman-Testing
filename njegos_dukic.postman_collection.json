@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "095905be-1404-4018-af01-703e9532bcb6",
+		"name": "Njegos_Dukic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ALL INITIALLY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Is empty initially.\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.json().length).to.equal(0);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID INITIALLY (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get one from empty list.\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT FIRST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Insert first\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response_json = pm.response.json();\r",
+							"\r",
+							"    pm.expect(response_json.studentId).to.equal(1);\r",
+							"    pm.expect(response_json.studentId).to.be.a(\"number\");\r",
+							"\r",
+							"    pm.expect(response_json.studentName).to.equal(\"Njegos Dukic\");\r",
+							"    pm.expect(response_json.studentName).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentEmail).to.equal(\"Njegos.Dukic@student.etf.unibl.org\");\r",
+							"    pm.expect(response_json.studentEmail).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentBranch).to.equal(\"RI\");\r",
+							"    pm.expect(response_json.studentBranch).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\": 0,\r\n    \"studentName\": \"Njegos Dukic\",\r\n    \"studentEmail\": \"Njegos.Dukic@student.etf.unibl.org\",\r\n    \"studentBranch\": \"RI\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID AFTER INSERT (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get after POST.\",  () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response_json = pm.response.json();\r",
+							"\r",
+							"    pm.expect(response_json.studentId).to.equal(1);\r",
+							"    pm.expect(response_json.studentId).to.be.a('number');\r",
+							"\r",
+							"    pm.expect(response_json.studentName).to.equal(\"Njegos Dukic\");\r",
+							"    pm.expect(response_json.studentName).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentEmail).to.equal(\"Njegos.Dukic@student.etf.unibl.org\");\r",
+							"    pm.expect(response_json.studentEmail).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentBranch).to.equal(\"RI\");\r",
+							"    pm.expect(response_json.studentBranch).to.be.a(\"string\");\r",
+							"   \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE BY ID (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update by ID.\",  () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response_json = pm.response.json();\r",
+							"\r",
+							"    pm.expect(response_json.studentId).to.equal(1);\r",
+							"    pm.expect(response_json.studentId).to.be.a('number');\r",
+							"\r",
+							"    pm.expect(response_json.studentName).to.equal(\"Negos Dukic PUT\");\r",
+							"    pm.expect(response_json.studentName).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentEmail).to.equal(\"Negos.Dukic.PUT@student.etf.unibl.org\");\r",
+							"    pm.expect(response_json.studentEmail).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentBranch).to.equal(\"ri\");\r",
+							"    pm.expect(response_json.studentBranch).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\": 0,\r\n    \"studentName\": \"Negos Dukic PUT\",\r\n    \"studentEmail\": \"Negos.Dukic.PUT@student.etf.unibl.org\",\r\n    \"studentBranch\": \"ri\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID AFTER UPDATE (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get one after PUT.\",  () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response_json = pm.response.json();\r",
+							"\r",
+							"    pm.expect(response_json.studentId).to.equal(1);\r",
+							"    pm.expect(response_json.studentId).to.be.a('number');\r",
+							"\r",
+							"    pm.expect(response_json.studentName).to.equal(\"Negos Dukic PUT\");\r",
+							"    pm.expect(response_json.studentName).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentEmail).to.equal(\"Negos.Dukic.PUT@student.etf.unibl.org\");\r",
+							"    pm.expect(response_json.studentEmail).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentBranch).to.equal(\"ri\");\r",
+							"    pm.expect(response_json.studentBranch).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY ID (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete one.\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID AFTER DELETE (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get one by id after DELETE.\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE BY NON EXISTENT ID (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update by nonexistent ID.\",  () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\": 0,\r\n    \"studentName\": \"Negos Dukic\",\r\n    \"studentEmail\": \"Negos.Dukic@student.etf.unibl.org\",\r\n    \"studentBranch\": \"RI\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY NOT EXISTENT ID (ID = 1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete with wrong id.\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT SECOND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Insert second\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response_json = pm.response.json();\r",
+							"\r",
+							"    pm.expect(response_json.studentId).to.equal(2);\r",
+							"    pm.expect(response_json.studentId).to.be.a(\"number\");\r",
+							"\r",
+							"    pm.expect(response_json.studentName).to.equal(\"Njego Duki\");\r",
+							"    pm.expect(response_json.studentName).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentEmail).to.equal(\"Njego.Duki@student.etf.unibl.org\");\r",
+							"    pm.expect(response_json.studentEmail).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentBranch).to.equal(\"si\");\r",
+							"    pm.expect(response_json.studentBranch).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\": 0,\r\n    \"studentName\": \"Njego Duki\",\r\n    \"studentEmail\": \"Njego.Duki@student.etf.unibl.org\",\r\n    \"studentBranch\": \"si\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT THIRD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Insert third\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response_json = pm.response.json();\r",
+							"\r",
+							"    pm.expect(response_json.studentId).to.equal(3);\r",
+							"    pm.expect(response_json.studentId).to.be.a(\"number\");\r",
+							"\r",
+							"    pm.expect(response_json.studentName).to.equal(\"Nego Duk\");\r",
+							"    pm.expect(response_json.studentName).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentEmail).to.equal(\"Nego.Duk@student.etf.unibl.org\");\r",
+							"    pm.expect(response_json.studentEmail).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(response_json.studentBranch).to.equal(\"ri\");\r",
+							"    pm.expect(response_json.studentBranch).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\": 0,\r\n    \"studentName\": \"Nego Duk\",\r\n    \"studentEmail\": \"Nego.Duk@student.etf.unibl.org\",\r\n    \"studentBranch\": \"ri\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL AFTER TWO INSERTS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Is empty initially.\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.json().length).to.equal(2);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
